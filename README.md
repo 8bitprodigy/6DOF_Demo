@@ -7,3 +7,5 @@ You can rotate around all three axes and move in 6 directions(more if you combin
 
 
 Also includes a skybox.
+
+![](Screenshot.png)
