@@ -1,0 +1,6 @@
+res://default_bus_layout.tres
+res://main.tscn
+res://characters/player.tscn
+res://entities/projectile.tscn
+res://components/projectile_emitter.tscn
+res://resources/Attack.gd

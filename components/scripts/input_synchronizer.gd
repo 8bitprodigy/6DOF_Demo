@@ -8,8 +8,10 @@ class_name InputSynchronizer
 
 @export var is_primary_firing : bool = false
 @export var is_secondary_firing : bool = false
+var parent : Node
 
 func _ready():
+	parent = get_parent()
 	set_process(get_multiplayer_authority() == multiplayer.get_unique_id())
 	set_process_input(get_multiplayer_authority() == multiplayer.get_unique_id())
 
@@ -24,7 +26,7 @@ func _input(event):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) or Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE) or Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-func _process(delta):
+func _process(_delta):
 	rotation_vector.z = Input.get_action_strength("counter-clockwise")-Input.get_action_strength("clockwise")
 	
 	rotation_basis = Basis.IDENTITY
@@ -38,6 +40,8 @@ func _process(delta):
 	)
 	
 	is_primary_firing = Input.is_action_pressed("primary_fire")
+	if is_primary_firing: 
+		parent.get_node("projectile_emitter").fire()
 	is_secondary_firing = Input.is_action_pressed("secondary_fire")
 	
 	rotation_vector.x = 0.0

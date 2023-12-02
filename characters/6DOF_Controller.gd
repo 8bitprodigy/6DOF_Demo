@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name SixDOFController
 
-@export var SPEED : float = 5.0
+@export var SPEED : float = 100.0
 @export var THROTTLE_MULTIPLIER : float = 2.0
 @export var ACCELERATION : float = 5.0
 
@@ -43,7 +43,7 @@ func _physics_process(delta):
 	rotate(basis.z.normalized(), angular_velocity.z)
 	
 	var speed : float = clampf(Input.get_action_strength("throttle") * THROTTLE_MULTIPLIER , 1.0, THROTTLE_MULTIPLIER) * SPEED
-	var direction : Vector3 = ((basis.x * input.movement_vector.x) + (basis.y * input.movement_vector.y) + (basis.z * input.movement_vector.z)).normalized() * speed
+	var direction : Vector3 = ((basis.x * input.movement_vector.x) + (basis.y * input.movement_vector.y) + (basis.z * input.movement_vector.z)).normalized() * delta * speed
 	
 	velocity = lerp(velocity,direction,delta*ACCELERATION)
 	move_and_slide()

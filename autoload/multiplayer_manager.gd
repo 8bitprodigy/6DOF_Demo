@@ -1,5 +1,5 @@
 extends Node
-#class_name Game
+#class_name Multiplayer_Manager
 
 var _Player : PackedScene = preload("res://characters/player.tscn")
 var _projectile : PackedScene = preload("res://entities/projectile.tscn")
@@ -102,13 +102,18 @@ func remove_player(peer_id:int):
 		player.queue_free()
 
 func register_gun(peer_id:int,gun:ProjectileEmitter):
+	prints("Registration called on Peer ID: ", peer_id)
 	if !multiplayer.is_server():return
 	gun.fire_projectile.connect(add_projectile.bind(peer_id,gun))
-	prints("Registered gun: ", peer_id)
+	prints("Registered gun to Peer ID: ", peer_id)
 
 @rpc
-func add_projectile(peer_id:int,gun:ProjectileEmitter):
-	pass
+func add_projectile(peer_id:int, gun:ProjectileEmitter):
+	prints("Add Projectile called!")
+	var new_projectile = _projectile.instantiate()
+	get_tree().root.add_child(new_projectile)
+	new_projectile.add_exception(gun.parent)
+	new_projectile.spawn(gun)
 
 func upnp_setup():
 	var upnp = UPNP.new()
