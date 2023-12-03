@@ -111,7 +111,7 @@ func register_gun(peer_id:int,gun:ProjectileEmitter):
 func add_projectile(peer_id:int, gun:ProjectileEmitter):
 	prints("Add Projectile called!")
 	var new_projectile = _projectile.instantiate()
-	get_node(spawn_path).add_child(new_projectile)
+	get_tree().root.add_child(new_projectile)
 	new_projectile.add_exception(gun.parent)
 	new_projectile.spawn(gun)
 

@@ -1,8 +1,5 @@
 res://default_bus_layout.tres
-res://main.tscn
-res://skybox/skybox.gdshader
-res://skybox/skybox_cube.res
-res://skybox/space_skybox.tres
-res://autoload/multiplayer_manager.gd
-res://entities/projectile.gd
 res://characters/player.tscn
+res://skybox/skybox.gdshader
+res://main.tscn
+res://skybox/skybox.tscn

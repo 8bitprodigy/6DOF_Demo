@@ -10,8 +10,8 @@ func _ready() -> void:
 
 
 func spawn(firer:ProjectileEmitter) -> void:
-	global_transform.origin = firer.global_transform.origin
-	target_position = firer.global_transform.basis.z * projectile_length
+	global_transform = firer.global_transform
+	target_position = Vector3.FORWARD*projectile_length #firer.global_transform.basis.z * projectile_length
 	add_exception(firer.parent)
 	if lifespan > 0.0:
 		await get_tree().create_timer(lifespan).timeout
@@ -21,10 +21,6 @@ func spawn(firer:ProjectileEmitter) -> void:
 #var old_position : Vector3 = Vector3.ZERO
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta) -> void:
-	#global_position = old_position + (-global_transform.basis.z * speed * delta)
-	var half_projectile_length_vector = -global_transform.basis.z*0.5*projectile_length
-	global_position += target_position
-	target_position = transform.basis * (Vector3.FORWARD*speed) * delta
+	global_position = global_position + (target_position.length()*-global_transform.basis.z.normalized())
+	target_position =(Vector3.FORWARD*speed) * delta
 	force_shapecast_update()
-	$MeshInstance3D.position = half_projectile_length_vector
-	$end_pos.position = target_position

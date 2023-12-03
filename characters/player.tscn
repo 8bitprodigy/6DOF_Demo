@@ -59,7 +59,7 @@ shape = SubResource("SphereShape3D_ywv5q")
 shape = SubResource("SphereShape3D_64hw0")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)
 fov = 90.0
 near = 0.001
 
@@ -73,7 +73,6 @@ replication_config = SubResource("SceneReplicationConfig_la4et")
 visibility_update_mode = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
 mesh = SubResource("SphereMesh_oe5dx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
@@ -81,6 +80,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)
 mesh = SubResource("PrismMesh_1c1rf")
 
 [node name="projectile_emitter" parent="." instance=ExtResource("5_b8o4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, -0.5)
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(-1, 0, -8.9407e-08, 0, 1, 0, 8.9407e-08, 0, -1, 0, 0, 0)
