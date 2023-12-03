@@ -10,7 +10,7 @@ func _ready() -> void:
 
 
 func spawn(firer:ProjectileEmitter) -> void:
-	global_transform = firer.global_transform
+	global_transform.origin = firer.global_transform.origin
 	target_position = firer.global_transform.basis.z * projectile_length
 	add_exception(firer.parent)
 	if lifespan > 0.0:
@@ -23,7 +23,7 @@ func spawn(firer:ProjectileEmitter) -> void:
 func _process(delta) -> void:
 	#global_position = old_position + (-global_transform.basis.z * speed * delta)
 	var half_projectile_length_vector = -global_transform.basis.z*0.5*projectile_length
-	global_position = global_position + target_position
+	global_position += target_position
 	target_position = transform.basis * (Vector3.FORWARD*speed) * delta
 	force_shapecast_update()
 	$MeshInstance3D.position = half_projectile_length_vector
